@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <a href="index.html">Return</a>
+    <br>
+    <br>
+    <div id="genre" style="width: 480px;height:500px;"></div>
+    <script type="text/javascript">
+        $.getJSON("../static/data/genre.json", d => {
+            _data = d.map(v => ({
+                name: v[0],
+                value: v[1]
+            }))
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('genre'), 'light');
+
+            // 指定图表的配置项和数据
+            option = {
+                title: {
+                    text: '2000年-2019年各类型专辑的数量统计图',
+                    subtext: '从图中可以看出Indie类型的专辑数量最多。',
+                    // x: 'center'
+                    x: 'left'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    x: 'center',
+                    y: 'bottom',
+                    data: d.map(v => v[0])
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        dataView: {show: true, readOnly: false},
+                        magicType: {
+                            show: true,
+                            type: ['pie', 'funnel']
+                        },
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                calculable: true,
+                series: [
+                    {
+                        name: '半径模式',
+                        type: 'pie',
+                        radius: [30, 180],
+                        center: ['50%', '50%'],
+                        roseType: 'radius',
+                        label: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        lableLine: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data: _data
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        })
+    </script>
+</body>
+</html>

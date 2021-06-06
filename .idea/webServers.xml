@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3eee2e67-50ce-405d-9b61-eff96bd6d5cc" name="pyflink">
+        <fileTransfer rootFolder="/home2/zgx/codes/" accessType="SFTP" host="59.77.1.131" port="1422" sshConfigId="da800653-7063-4932-b47c-2ac14dbc77bb" sshConfig="zgx@59.77.1.131:1422 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
