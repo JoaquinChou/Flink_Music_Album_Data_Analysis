@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <title>ECharts</title>
+
+</head>
+<style>
+body{ font-family:"宋体"}
+</style>
+
+<body>
+ <a href="index.html">点击这里返回主列表</a>
+    <br>
+    <br>
+
+ <div id="top_50_albums" style="width: 100%;height:50px;"></div>
+    <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('top_50_albums'), 'light');
+            option = {
+                textStyle: {
+                    fontFamily: '宋体',
+                },
+                title: {
+                    text: '2000年-2019年最受欢迎的50张专辑词云图',
+                    x: 'center',
+                    // bottom: 540
+                    // padding: [0, 0, 20, 0]
+                },
+
+            }
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+    </script>
+
+    <div align="center"><img src="../templates/word_cloud.jpg" /></div>
+
+</body>
+</html>

@@ -9,12 +9,16 @@
     <script src="../static/js/jquery.min.js"></script>
 </head>
 
+<style>
+body{ font-family:"宋体"}
+</style>
+
 <body>
-    <a href="index.html">Return</a>
+    <a href="index.html">点击这里返回主列表</a>
     <br>
     <br>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="album_sales" style="width: 1000px;height:550px;"></div>
+    <div id="album_sales" style="width: 100%;height:550px;"></div>
     <script type="text/javascript">
         $.getJSON("../static/data/album_sales.json", d => {
             console.log(d);
@@ -26,14 +30,24 @@
             var data = d.map(v => parseInt(v[1])/1e6);
 
             option = {
+                textStyle: {
+                            fontFamily: '宋体',
+                        },
                 title: {
                     text: '2000年-2019年各类型专辑销量统计图',
-                    subtext: '该图统计了各个类型专辑的销量和，从图中可以看出 Indie 类型的专辑销量最高，将近 47 亿。Pop 类型的专辑销量排在第二，约为39亿。',
                     x: 'center',
                     // bottom: 10
                     padding: [0, 0, 15, 0]
                 },
-                color: ['#3398DB'],
+                color: ['#FF6600'],
+                // label:{
+                //     normal: {
+                //         textStyle: {
+                //             fontFamily: 'Times New Roman',
+                //         },
+                //     },
+                // },
+
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -64,7 +78,7 @@
                 yAxis: [
                     {
                         type: 'value',
-                        name: '# Million Albums',
+                        name: '(单位：百万张)',
                         nameLocation: 'middle',
                         nameGap: 50
                     }

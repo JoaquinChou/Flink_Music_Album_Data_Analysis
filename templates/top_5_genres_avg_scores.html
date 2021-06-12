@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+</head>
+
+<style>
+body{ font-family:"宋体"}
+</style>
+
+<body>
+    <a href="index.html">点击这里返回主列表</a>
+    <br>
+    <br>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="top_5_genres_avg_scores" style="width: 100%;height:550px;"></div>
+    <script type="text/javascript">
+        $.getJSON("../static/data/top_5_genres_avg_scores.json", d => {
+            console.log(d);
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('top_5_genres_avg_scores'), 'light');
+            option = {
+                textStyle: {
+                            fontFamily: '宋体',
+                },
+                title: {
+                    text: '2000年-2019年总销量前五的专辑类型的在各个评价网站上的平均分数统计图',
+                    x: 'center',
+                    // bottom: 540
+                    // padding: [0, 0, 20, 0]
+                },
+                legend: {
+                    padding: [35, 0, 0, 0],
+                },
+                tooltip: {},
+                dataset: {
+                    source: [
+                        ['genre', ...d.map(v => v[0])],
+                        ['rolling_stone_critic', ...d.map(v => v[1])],
+                        ['mtv_critic', ...d.map(v => v[2])],
+                        ['music_maniac_critic', ...d.map(v => v[3])]
+                    ]
+                },
+                xAxis: [
+                    { type: 'category',
+                        gridIndex: 0,
+                        name: '（单位：专辑类型）',
+                },
+                    { type: 'category',
+                        gridIndex: 1,
+                        name: '（单位：音乐平台）',}
+                ],
+                yAxis: [
+                    {
+                        gridIndex: 0 , min: 2.7,
+                        name: '（单位：分数）',},
+                    {
+                        gridIndex: 1 , min: 2.7,
+                        name: '（单位：分数）',}
+                ],
+                grid: [
+                    { bottom: '55%' },
+                    { top: '55%' }
+                ],
+                series: [
+
+                    // These series are in the first grid.
+                    { type: 'bar', seriesLayoutBy: 'row' , barWidth: 30,
+                    itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 12
+                                    }
+                                }
+                            }
+                        },
+                    },
+                    { type: 'bar', seriesLayoutBy: 'row' , barWidth: 30,
+                    itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 12
+                                    }
+                                }
+                            }
+                        },},
+                    { type: 'bar', seriesLayoutBy: 'row' , barWidth: 30,
+                    itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 12
+                                    }
+                                }
+                            }
+                        },},
+                    // These series are in the second grid.
+                    { type: 'bar', xAxisIndex: 1, yAxisIndex: 1 , barWidth: 35,
+                    itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 12
+                                    }
+                                }
+                            }
+                        },},
+                    { type: 'bar', xAxisIndex: 1, yAxisIndex: 1 , barWidth: 35,
+                    itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 12
+                                    }
+                                }
+                            }
+                        },},
+                    { type: 'bar', xAxisIndex: 1, yAxisIndex: 1 , barWidth: 35,
+                    itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 12
+                                    }
+                                }
+                            }
+                        },},
+                    { type: 'bar', xAxisIndex: 1, yAxisIndex: 1 , barWidth: 35,
+                    itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 12
+                                    }
+                                }
+                            }
+                        },},
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        })
+
+</script>
+</body>
+</html>

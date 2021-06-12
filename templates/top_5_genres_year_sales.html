@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+</head>
+
+<style>
+body{ font-family:"宋体"}
+</style>
+
+<body>
+    <a href="index.html">点击这里返回主列表</a>
+    <br>
+    <br>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="top_5_genres_year_sales" style="width: 100%;height:550px;"></div>
+    <script type="text/javascript">
+        $.getJSON("../static/data/top_5_genres_year_sales.json", d => {
+            console.log(d);
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('top_5_genres_year_sales'), 'light');
+            option = {
+                textStyle: {
+                            fontFamily: '宋体',
+                },
+                grid:{
+                    top: '50%', // 与容器顶部的距离
+                    bottom: '4%', // 与容器底部的距离
+                },
+                title: {
+                    text: '2000年-2019年总销量前五的专辑类型的各年份销量统计图',
+                    x: 'center',
+                    // subtext: '该图显示了从2000年到2019年发行的专辑数量和单曲数量的变化趋势，从图中可以看出，专辑数量变化很小，基本稳定在5000左右；单曲数量有轻微的波动，大概为专辑数量的10倍。'
+                },
+
+                legend: {
+                    padding: [45, 0, 0, 0],
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    showContent: false
+                },
+                dataset: {
+                    source: [
+                        ['year', ...d['Indie'].map(v => `${v[1]}`)],
+                        ...['Indie', 'Pop', 'Rap', 'Latino', 'Pop-Rock'].map(v => [v, ...d[v].map(v1 => v1[2])])
+                    ]
+                },
+                xAxis: {
+                    type: 'category',
+                    name: '（单位：年份）',
+                },
+                yAxis: { gridIndex: 0,
+                    name: '（单位：个数）',
+                },
+                series: [
+                    { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                    { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                    { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                    { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                    { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                    {
+                        type: 'pie',
+                        id: 'pie',
+                        radius: '30%',
+                        center: ['50%', '30%'],
+                        label: {
+                            formatter: '{b}: {@2000} ({d}%)' //b是数据名，d是百分比
+                        },
+                        encode: {
+                            itemName: 'year',
+                            value: '2000',
+                            tooltip: '2000'
+                        }
+                    }
+
+                ]
+            };
+
+            myChart.on('updateAxisPointer', function (event) {
+                var xAxisInfo = event.axesInfo[0];
+                if (xAxisInfo) {
+                    var dimension = xAxisInfo.value + 1;
+                    myChart.setOption({
+                        series: {
+                            id: 'pie',
+                            label: {
+                                formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                            },
+                            encode: {
+                                value: dimension,
+                                tooltip: dimension
+                            }
+                        }
+                    });
+                }
+            });
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            window.onresize = function(){
+            myChart.resize();//使图表适应
+            };
+
+        })
+    </script>
+</body>
+</html>

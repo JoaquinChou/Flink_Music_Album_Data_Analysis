@@ -9,24 +9,32 @@
     <script src="../static/js/jquery.min.js"></script>
 </head>
 
+<style>
+body{ font-family:"宋体"}
+</style>
+
 <body>
-    <a href="index.html">Return</a>
+    <a href="index.html">点击这里返回主列表</a>
     <br>
     <br>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="canvas" style="width: 1000px;height:550px;"></div>
+    <div id="canvas" style="width: 100%;height:550px;"></div>
     <script type="text/javascript">
         $.getJSON("../static/data/year_albums_and_tracks.json", d => {
             console.log(d)
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('canvas'), 'light');
-
-            var colors = ['#5793f3', '#d14a61', '#675bba'];
-
             option = {
+                textStyle: {
+                            fontFamily: '宋体',
+                        },
+                grid:{
+                    top: '15%', // 与容器顶部的距离
+                    bottom: '5%', // 与容器底部的距离
+                },
                 title: {
                     text: '2000年-2019年每年的专辑数量和单曲数量统计图',
-                    padding: [1, 0, 0, 15]
+                    x: 'center',
                     // subtext: '该图显示了从2000年到2019年发行的专辑数量和单曲数量的变化趋势，从图中可以看出，专辑数量变化很小，基本稳定在5000左右；单曲数量有轻微的波动，大概为专辑数量的10倍。'
                 },
                 tooltip: {
@@ -34,7 +42,7 @@
                 },
                 legend: {
                     data: ['单曲数量', '专辑数量'],
-                    padding: [2, 0, 0, 0]
+                    padding: [50, 0, 0, 0]
                 },
                 toolbox: {
                     show: true,
@@ -50,13 +58,14 @@
                 },
                 xAxis: {
                     type: 'category',
+                    name: '（单位：年份）',
                     boundaryGap: false,
                     data: d['years'],
                     boundaryGap: ['20%', '20%']
                 },
                 yAxis: {
                     type: 'value',
-                    // type: 'log',
+                    name: '（单位：个数）',
                     axisLabel: {
                         formatter: '{value}'
                     }
@@ -64,6 +73,7 @@
                 series: [
                     {
                         name: '单曲数量',
+                        color: '#9933FF',
                         type: 'bar',
                         data: d['tracks'],
                         barWidth: 15,
@@ -71,6 +81,7 @@
                     {
                         name: '专辑数量',
                         type: 'bar',
+                        color: '#FF9999',
                         data: d['albums'],
                         barGap:  '-100%',
                         barWidth: 15,
