@@ -517,6 +517,6 @@ vi ~/.bashrc
 
 # 致谢
 
-课程最后感谢林老师的Flink和Spark的辛苦教学，以及提供给我们<a href="http://dblab.xmu.edu.cn/">dblab网站</a>上的学习资源。本次音乐专辑分析报告的代码将于2021年6月20号后开源于https://github.com/JoaquinChou/Flink_Music_Album_Data_Analysis。
+课程最后感谢林老师的Flink和Spark的辛苦教学，以及提供给我们<a href="http://dblab.xmu.edu.cn/">dblab网站</a>上的学习资源。本次音乐专辑分析报告的代码将于2021年6月20号后开源于https://github.com/JoaquinChou/Flink_Music_Album_Data_Analysis 。
 
 <div align="center"><img src="https://z3.ax1x.com/2021/05/04/gukARU.png" alt="gukARU.png" border="0" /></div>
